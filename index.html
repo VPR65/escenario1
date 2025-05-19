@@ -30,6 +30,31 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
+        header {
+            margin-bottom: 24px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            background: #e4e8eb;
+            padding: 12px 0;
+            border-radius: 8px;
+            margin-bottom: 22px;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        nav a.active, nav a:hover {
+            background: var(--secondary-color);
+            color: #fff;
+        }
         h1 {
             color: var(--primary-color);
             text-align: center;
@@ -100,27 +125,38 @@
             .nav-grid { grid-template-columns: 1fr; }
             .nav-card { padding: 15px; }
             .nav-card a { font-size: 1.1em; }
+            nav { flex-direction: column; gap: 6px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Indicadores Financieros de Chile</h1>
-        <div class="datetime" id="datetime">
-            <span><span class="icon">📅</span> <span id="fecha"></span></span>
-            <span><span class="icon">⏰</span> <span id="hora"></span></span>
-        </div>
-        <div class="nav-grid">
-            <div class="nav-card">
+        <header>
+            <nav>
+                <a href="index.html" class="active">Inicio</a>
                 <a href="pagina1.html">Indicadores Financieros</a>
-            </div>
-            <div class="nav-card">
                 <a href="pagina2.html">Criptomonedas</a>
-            </div>
-            <div class="nav-card">
                 <a href="pagina3.html">Indicadores en Tabla</a>
+            </nav>
+            <h1>Indicadores Financieros de Chile</h1>
+        </header>
+        <main>
+            <div class="datetime" id="datetime">
+                <span><span class="icon">📅</span> <span id="fecha"></span></span>
+                <span><span class="icon">⏰</span> <span id="hora"></span></span>
             </div>
-        </div>
+            <div class="nav-grid">
+                <div class="nav-card">
+                    <a href="pagina1.html">Indicadores Financieros</a>
+                </div>
+                <div class="nav-card">
+                    <a href="pagina2.html">Criptomonedas</a>
+                </div>
+                <div class="nav-card">
+                    <a href="pagina3.html">Indicadores en Tabla</a>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -133,10 +169,9 @@
             // Forzar animación
             const datetime = document.getElementById('datetime');
             datetime.style.animation = 'none';
-            datetime.offsetHeight; // Trigger reflow
+            datetime.offsetHeight;
             datetime.style.animation = 'fadeIn 0.5s ease-in-out';
         }
-
         document.addEventListener('DOMContentLoaded', () => {
             actualizarFechaHora();
             setInterval(actualizarFechaHora, 1000);

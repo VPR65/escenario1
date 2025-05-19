@@ -14,7 +14,6 @@
             --card-bg: #fff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -23,7 +22,6 @@
             background-color: var(--bg-color);
             color: var(--text-color);
         }
-        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -32,19 +30,41 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
-        
+        header {
+            margin-bottom: 24px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            background: #e4e8eb;
+            padding: 12px 0;
+            border-radius: 8px;
+            margin-bottom: 22px;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 6px 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+        nav a.active, nav a:hover {
+            background: var(--secondary-color);
+            color: #fff;
+        }
         h1, h2 {
             color: var(--primary-color);
             text-align: center;
         }
-        
         h1 {
             margin-bottom: 30px;
             font-size: 2.2em;
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 10px;
         }
-        
         .data-section {
             margin-bottom: 30px;
             padding: 20px;
@@ -53,17 +73,14 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
-        
         .data-section:hover {
             transform: translateY(-5px);
         }
-        
         .data-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
-        
         .data-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
             padding: 20px;
@@ -71,25 +88,21 @@
             text-align: center;
             border-left: 4px solid var(--secondary-color);
         }
-        
         .data-value {
             font-size: 2em;
             font-weight: bold;
             color: var(--primary-color);
             margin: 10px 0;
         }
-        
         .data-label {
             color: var(--secondary-color);
             font-weight: bold;
             font-size: 1.1em;
         }
-        
         .currency {
             color: var(--accent-color);
             font-size: 0.8em;
         }
-        
         #hora-actual {
             text-align: center;
             font-size: 1.3em;
@@ -99,7 +112,6 @@
             padding: 15px;
             border-radius: 8px;
         }
-        
         .loader {
             border: 5px solid #f3f3f3;
             border-radius: 50%;
@@ -109,69 +121,98 @@
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
         .update-info {
             text-align: center;
             font-style: italic;
             color: #7f8c8d;
             margin-top: 30px;
         }
+        .export-btn {
+            display: block;
+            margin: 35px auto 0 auto;
+            padding: 5px 12px;
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 1px 4px rgba(44, 62, 80, 0.06);
+            width: fit-content;
+        }
+        .export-btn:hover {
+            background: var(--primary-color);
+        }
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            nav { flex-direction: column; gap: 6px; }
+            .export-btn { font-size: 0.85em; margin-top: 22px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Indicadores Financieros de Chile</h1>
+        <header>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="pagina1.html" class="active">Indicadores Financieros</a>
+                <a href="pagina2.html">Criptomonedas</a>
+                <a href="pagina3.html">Indicadores en Tabla</a>
+            </nav>
+            <h1>Indicadores Financieros de Chile</h1>
+        </header>
         
-        <div id="hora-actual">
-            <span class="loader"></span>
-        </div>
-        
-        <div class="data-section">
-            <h2>Divisas y Criptomonedas</h2>
-            <div class="data-grid" id="indicadores-financieros">
-                <div class="data-card">
-                    <div class="data-label">Dólar (Observado)</div>
-                    <div class="data-value" id="dolar"><span class="loader"></span></div>
-                    <div class="currency">CLP</div>
-                </div>
-                
-                <div class="data-card">
-                    <div class="data-label">Euro</div>
-                    <div class="data-value" id="euro"><span class="loader"></span></div>
-                    <div class="currency">CLP</div>
-                </div>
-                
-                <div class="data-card">
-                    <div class="data-label">Bitcoin (BTC)</div>
-                    <div class="data-value" id="bitcoin"><span class="loader"></span></div>
-                    <div class="currency">CLP</div>
+        <main>
+            <div id="hora-actual">
+                <span class="loader"></span>
+            </div>
+            <div class="data-section">
+                <h2>Divisas y Criptomonedas</h2>
+                <div class="data-grid" id="indicadores-financieros">
+                    <div class="data-card">
+                        <div class="data-label">💲 Dólar (Observado)</div>
+                        <div class="data-value" id="dolar"><span class="loader"></span></div>
+                        <div class="currency">CLP</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">💶 Euro</div>
+                        <div class="data-value" id="euro"><span class="loader"></span></div>
+                        <div class="currency">CLP</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">₿ Bitcoin (BTC)</div>
+                        <div class="data-value" id="bitcoin"><span class="loader"></span></div>
+                        <div class="currency">CLP</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="data-section">
-            <h2>Indicadores Económicos</h2>
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-label">UF</div>
-                    <div class="data-value" id="uf"><span class="loader"></span></div>
-                    <div class="currency">CLP</div>
-                </div>
-                
-                <div class="data-card">
-                    <div class="data-label">UTM</div>
-                    <div class="data-value" id="utm"><span class="loader"></span></div>
-                    <div class="currency">CLP</div>
+            <div class="data-section">
+                <h2>Indicadores Económicos</h2>
+                <div class="data-grid">
+                    <div class="data-card">
+                        <div class="data-label">🟣 UF</div>
+                        <div class="data-value" id="uf"><span class="loader"></span></div>
+                        <div class="currency">CLP</div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-label">🧾 UTM</div>
+                        <div class="data-value" id="utm"><span class="loader"></span></div>
+                        <div class="currency">CLP</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <p class="update-info">Los datos se actualizan automáticamente cada 1 hora</p>
+            <p class="update-info">Los datos se actualizan automáticamente cada 1 hora</p>
+            <!-- BOTON ABAJO, PEQUEÑO -->
+            <button class="export-btn" onclick="exportarCSV()">Exportar a CSV</button>
+        </main>
     </div>
 
     <script>
@@ -186,7 +227,6 @@
                 maximumFractionDigits: 2 
             });
         }
-        
         function formatearPrecioGrande(numero) {
             if (typeof numero !== 'number') return 'N/A';
             if (numero >= 1000000) {
@@ -197,7 +237,6 @@
             }
             return formatearNumero(numero);
         }
-
         // --- HORA ACTUAL ---
         function actualizarHora() {
             const ahora = new Date();
@@ -208,55 +247,41 @@
                 hour12: false 
             };
             const opcionesFecha = { 
-                weekday: 'long', 
                 year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+                month: '2-digit', 
+                day: '2-digit' 
             };
-            
-            const fechaStr = ahora.toLocaleDateString('es-CL', opcionesFecha);
+            const fechaStr = ahora.toLocaleDateString('sv-SE', opcionesFecha); // yyyy-mm-dd
             const horaStr = ahora.toLocaleTimeString('es-CL', opcionesHora);
-            
             document.getElementById('hora-actual').innerHTML = `
                 <div style="font-size: 1.5em; font-weight: bold; margin-bottom: 5px;">${horaStr}</div>
                 <div>${fechaStr}</div>
             `;
         }
-
         // --- INDICADORES FINANCIEROS ---
         async function obtenerIndicadoresFinancieros() {
             const url = 'https://mindicador.cl/api';
-            
             try {
                 const response = await fetch(url);
-                
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status}`);
                 }
-                
                 const data = await response.json();
-                
                 // Actualizar los valores en la interfaz
                 document.getElementById('dolar').textContent = 
                     data.dolar?.valor ? formatearNumero(data.dolar.valor) : 'N/A';
-                
                 document.getElementById('euro').textContent = 
                     data.euro?.valor ? formatearNumero(data.euro.valor) : 'N/A';
-                
                 document.getElementById('uf').textContent = 
                     data.uf?.valor ? formatearNumero(data.uf.valor) : 'N/A';
-                
                 document.getElementById('utm').textContent = 
                     data.utm?.valor ? formatearNumero(data.utm.valor) : 'N/A';
-                
                 document.getElementById('bitcoin').textContent = 
                     data.bitcoin?.valor ? formatearPrecioGrande(data.bitcoin.valor) : 'N/A';
-                
                 // Mostrar hora de última actualización
                 const ahora = new Date();
                 document.querySelector('.update-info').textContent = 
                     `Última actualización: ${ahora.toLocaleTimeString('es-CL')} - Se actualiza cada 1 hora`;
-                
             } catch (error) {
                 console.error('Error al obtener indicadores:', error);
                 document.querySelectorAll('.data-value').forEach(el => {
@@ -264,17 +289,38 @@
                 });
             }
         }
-        
+
+        // --- EXPORTAR A CSV ---
+        function exportarCSV() {
+            const cards = document.querySelectorAll('.data-card');
+            // Obtener fecha y hora de exportación en formato separado
+            const ahora = new Date();
+            const fecha = ahora.toLocaleDateString('sv-SE'); // yyyy-mm-dd
+            const hora = ahora.toLocaleTimeString('es-CL', { hour12: false });
+            let csv = "Unidad;Valor;Fecha;Hora\n";
+            cards.forEach(card => {
+                // Elimina emojis y recorta espacios para el nombre
+                let nombre = card.querySelector('.data-label').textContent.replace(/^[^\w\d]+/,'').trim();
+                let valor = card.querySelector('.data-value').textContent.trim();
+                csv += `"${nombre}";"${valor}";"${fecha}";"${hora}"\n`;
+            });
+            // Descarga el CSV
+            const blob = new Blob([csv], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "indicadores_chile.csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
         // --- INICIALIZACIÓN Y ACTUALIZACIÓN PERIÓDICA ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Ejecutar primero
             actualizarHora();
             obtenerIndicadoresFinancieros();
-            
-            // Actualizar hora cada segundo
             setInterval(actualizarHora, 1000);
-            
-            // Actualizar datos financieros cada 1 hora
             setInterval(obtenerIndicadoresFinancieros, UPDATE_INTERVAL);
         });
     </script>

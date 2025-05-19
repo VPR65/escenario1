@@ -24,6 +24,12 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        .data-time-note {
+            font-size: 0.95em;
+            color: #666;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
         .table-container {
             margin-top: 20px;
             overflow-x: auto;
@@ -67,7 +73,6 @@
         .back-link a:hover {
             color: #0056b3;
         }
-        /* Responsive para móviles */
         @media (max-width: 600px) {
             body { padding: 10px; }
             .header { padding: 1rem; }
@@ -95,76 +100,47 @@
             <h2>¿Qué son las criptomonedas?</h2>
             <p>Las criptomonedas son monedas digitales que funcionan sin bancos ni gobiernos. Usan tecnología <strong>blockchain</strong>, un registro seguro y público. La más famosa es <strong>Bitcoin</strong>, pero hay miles, como Ethereum, Solana y más.</p>
             <p><strong>¿Por qué importan?</strong> Suben o bajan de precio rápido, lo que las hace atractivas pero riesgosas. Aquí verás precios, cambios, gráficos y el sentimiento del mercado.</p>
+            <p class="data-time-note" id="info-data-time"></p>
         </div>
         <div class="info-box fear-greed-box">
             <h2>Indicador de Miedo y Codicia (Fear & Greed Index)</h2>
-            <p>Mide el sentimiento del mercado cripto, de 0 (miedo extremo) a 100 (codicia extrema). Bajo: oportunidad de compra. Alto: posible corrección.</p>
-            <p class="meter">Valor actual: 35 (Miedo)</p>
+            <p id="fearGreedDesc">Mide el sentimiento del mercado cripto, de 0 (miedo extremo) a 100 (codicia extrema). Bajo: oportunidad de compra. Alto: posible corrección.</p>
+            <p class="meter" id="fearGreedValue">Cargando...</p>
             <div class="chart-container fear-greed-chart">
                 <canvas id="chartFearGreed"></canvas>
                 <p class="text-center">Fear & Greed Index (Últimos 5 días)</p>
             </div>
             <h3>Análisis de los últimos 5 días</h3>
-            <ul>
-                <li><strong>10/05/2025:</strong> 15 (Miedo Extremo) - Caída de Bitcoin bajo $81,000, $649M en liquidaciones.</li>
-                <li><strong>11/05/2025:</strong> 20 (Miedo Extremo) - Venta masiva, pánico.</li>
-                <li><strong>12/05/2025:</strong> 25 (Miedo) - Ligera recuperación, cautela.</li>
-                <li><strong>13/05/2025:</strong> 30 (Miedo) - Estabilización, noticias macroeconómicas.</li>
-                <li><strong>14/05/2025:</strong> 35 (Miedo) - Menos intenso, miedo persiste.</li>
+            <ul id="fearGreedList">
+                <li>Cargando datos...</li>
             </ul>
-            <p><strong>Comentario:</strong> El miedo domina por volatilidad reciente. Puede ser oportunidad de compra, pero con cautela. <small>Fuente: <a href="https://coinmarketcap.com" target="_blank">CoinMarketCap</a>.</small></p>
+            <p><strong>Comentario:</strong> El miedo/codicia refleja la volatilidad reciente. <small>Fuente: <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank">alternative.me</a>.</small></p>
+            <p class="data-time-note" id="feargreed-data-time"></p>
         </div>
         <div class="info-box table-container">
-            <h2>Principales Criptomonedas Hoy</h2>
+            <h2>Principales Criptomonedas y Commodities Hoy</h2>
             <p>Precios, cambios en 24 horas y capitalización de mercado.</p>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Criptomoneda</th>
+                        <th>Activo</th>
                         <th>Precio (USD)</th>
                         <th>Cambio 24h (%)</th>
                         <th>Capitalización (USD)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Bitcoin (BTC)</td>
-                        <td>$65,000</td>
-                        <td class="positive">+2.5%</td>
-                        <td>$1.2T</td>
-                    </tr>
-                    <tr>
-                        <td>Ethereum (ETH)</td>
-                        <td>$3,200</td>
-                        <td class="negative">-1.8%</td>
-                        <td>$380B</td>
-                    </tr>
-                    <tr>
-                        <td>Binance Coin (BNB)</td>
-                        <td>$600</td>
-                        <td class="positive">+0.9%</td>
-                        <td>$90B</td>
-                    </tr>
-                    <tr>
-                        <td>Solana (SOL)</td>
-                        <td>$150</td>
-                        <td class="positive">+4.2%</td>
-                        <td>$65B</td>
-                    </tr>
-                    <tr>
-                        <td>Cardano (ADA)</td>
-                        <td>$0.45</td>
-                        <td class="negative">-3.1%</td>
-                        <td>$16B</td>
-                    </tr>
+                <tbody id="tabla-precios">
+                    <tr><td colspan="4">Cargando datos...</td></tr>
                 </tbody>
             </table>
+            <p id="tabla-errores" style="color:red;"></p>
+            <p class="data-time-note" id="tabla-data-time"></p>
             <p><small><strong>Nota:</strong> Verde: precio subió. Rojo: precio bajó. Capitalización grande = más estabilidad.</small></p>
         </div>
         <div class="info-box">
             <h2>Tendencias de Precios (Últimos 7 días)</h2>
-            <p>Gráficos de precios de criptomonedas y el dólar en la última semana.</p>
-            <div class="row">
+            <p>Gráficos de precios de criptomonedas, oro y cobre en la última semana.</p>
+            <div class="row" id="grafico-tendencias-row">
                 <div class="col-md-4 chart-container">
                     <canvas id="chartBTC"></canvas>
                     <p class="text-center">Bitcoin (BTC)</p>
@@ -186,10 +162,16 @@
                     <p class="text-center">Cardano (ADA)</p>
                 </div>
                 <div class="col-md-4 chart-container">
-                    <canvas id="chartUSD"></canvas>
-                    <p class="text-center">Dólar (USD/CLP)</p>
+                    <canvas id="chartGOLD"></canvas>
+                    <p class="text-center">Oro (Gold / USD)</p>
+                </div>
+                <div class="col-md-4 chart-container">
+                    <canvas id="chartCOPPER"></canvas>
+                    <p class="text-center">Cobre (Copper / USD)</p>
                 </div>
             </div>
+            <p id="graficos-errores" style="color:red;"></p>
+            <p class="data-time-note" id="tendencias-data-time"></p>
             <p><small><strong>Nota:</strong> Los precios son volátiles. Investiga antes de invertir.</small></p>
         </div>
         <div class="info-box">
@@ -200,156 +182,238 @@
                 <li><strong>Wallets:</strong> Usa billeteras digitales (apps o dispositivos).</li>
                 <li><strong>Investiga:</strong> Ejemplo: Ethereum soporta aplicaciones descentralizadas.</li>
             </ul>
+            <p class="data-time-note" id="consejos-data-time"></p>
         </div>
         <div class="info-box">
             <h2>Análisis del Mercado de Criptomonedas</h2>
-            <p>Observaciones basadas en datos de ejemplo:</p>
+            <p>Observaciones basadas en datos reales:</p>
             <ul>
-                <li><strong>Tendencia:</strong> Bitcoin (+2.5%) y Solana (+4.2%) suben; Ethereum (-1.8%) y Cardano (-3.1%) bajan.</li>
-                <li><strong>Bitcoin:</strong> Líder con $1.2T, marca la dirección del mercado.</li>
+                <li><strong>Tendencia:</strong> Gráficos y tabla reflejan variaciones recientes.</li>
+                <li><strong>Bitcoin:</strong> Líder en capitalización, suele marcar la dirección del mercado.</li>
                 <li><strong>Factores:</strong> Noticias, tecnología, o especulación mueven precios.</li>
                 <li><strong>Recomendación:</strong> Usa gráficos y Fear & Greed Index, pero diversifica.</li>
             </ul>
-            <p><small><strong>Nota:</strong> Usa datos reales (CoinGecko, CoinMarketCap) para tendencias específicas.</small></p>
+            <p><small><strong>Nota:</strong> Usa datos reales (CoinGecko, CoinMarketCap, alternative.me) para tendencias específicas.</small></p>
+            <p class="data-time-note" id="analisis-data-time"></p>
         </div>
     </div>
     <footer>
-        <p>Datos de ejemplo - Consulta <a href="https://www.coingecko.com" target="_blank" style="color: #00ffcc;">CoinGecko</a> o <a href="https://coinmarketcap.com" target="_blank" style="color: #00ffcc;">CoinMarketCap</a> | Diseñado para aprender</p>
+        <p>Datos en tiempo real: <a href="https://www.coingecko.com" target="_blank" style="color: #00ffcc;">CoinGecko</a> y <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color: #00ffcc;">alternative.me</a> | Diseñado para aprender</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Generar fechas para los últimos 5 días (formato DD/MM) para Fear & Greed
-        const today = new Date();
-        const fearGreedLabels = Array.from({ length: 5 }, (_, i) => {
-            const date = new Date(today);
-            date.setDate(today.getDate() - (4 - i));
-            return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-        });
+        // Función para obtener hora local en formato legible
+        function obtenerFechaHoraLocal() {
+            const ahora = new Date();
+            return ahora.toLocaleString('es-CL', { hour12: false });
+        }
 
-        // Generar fechas para los últimos 7 días (formato DD/MM) para otros gráficos
-        const priceLabels = Array.from({ length: 7 }, (_, i) => {
-            const date = new Date(today);
-            date.setDate(today.getDate() - (6 - i));
-            return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`;
-        });
+        // Setea hora de carga para todos los cuadros estáticos (no actualizables)
+        document.getElementById("info-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
+        document.getElementById("consejos-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
+        document.getElementById("analisis-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
 
-        // Configuración base de gráficos
-        const chartConfig = {
-            type: 'line',
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: false, title: { display: true, text: 'Valor' } },
-                    x: { title: { display: true, text: 'Fecha' } }
-                }
+        // ====== FEAR & GREED INDEX (alternative.me, CORS OK) ======
+        async function cargarFearGreed() {
+            const endpoint = "https://api.alternative.me/fng/?limit=5";
+            try {
+                const res = await fetch(endpoint);
+                const data = await res.json();
+                const registros = data.data;
+                const actual = registros[0];
+                document.getElementById("fearGreedValue").textContent = `Valor actual: ${actual.value} (${actual.value_classification})`;
+                // Gráfico últimos 5 días
+                const labels = registros.map(r => {
+                    const fecha = new Date(r.timestamp * 1000);
+                    return `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth()+1).toString().padStart(2, '0')}`;
+                }).reverse();
+                const valores = registros.map(r => Number(r.value)).reverse();
+                if(window.fearGreedChartObj) window.fearGreedChartObj.destroy();
+                window.fearGreedChartObj = new Chart(document.getElementById('chartFearGreed').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            label: 'Fear & Greed Index',
+                            data: valores,
+                            borderColor: '#ff5733',
+                            fill: false,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Índice' } },
+                            x: { title: { display: true, text: 'Fecha' } }
+                        }
+                    }
+                });
+                // Análisis últimos 5 días
+                let txt = "";
+                registros.reverse().forEach((r,i) => {
+                    const fecha = new Date(r.timestamp * 1000);
+                    const fechaStr = `${fecha.getDate().toString().padStart(2, '0')}/${(fecha.getMonth()+1).toString().padStart(2, '0')}/${fecha.getFullYear()}`;
+                    txt += `<li><strong>${fechaStr}:</strong> ${r.value} (${r.value_classification})</li>`;
+                });
+                document.getElementById("fearGreedList").innerHTML = txt;
+                document.getElementById("feargreed-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
+            } catch(e) {
+                document.getElementById("fearGreedValue").textContent = "No se pudo obtener el índice.";
+                document.getElementById("fearGreedList").innerHTML = "<li>No disponible.</li>";
+                document.getElementById("feargreed-data-time").textContent = "Error al actualizar: " + obtenerFechaHoraLocal();
             }
-        };
+        }
+        cargarFearGreed();
+        setInterval(cargarFearGreed, 1000 * 60 * 60 * 6);
 
-        // Fear & Greed Index
-        new Chart(document.getElementById('chartFearGreed').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: fearGreedLabels,
-                datasets: [{
-                    label: 'Fear & Greed Index',
-                    data: [15, 20, 25, 30, 35],
-                    borderColor: '#ff5733',
-                    fill: false,
-                    tension: 0.3
-                }]
-            }
-        });
+        // ========= PRINCIPALES ACTIVOS Y TENDENCIAS =========
+        const activos = [
+            { id: "bitcoin", nombre: "Bitcoin (BTC)", symbol: "BTC", chart: "chartBTC" },
+            { id: "ethereum", nombre: "Ethereum (ETH)", symbol: "ETH", chart: "chartETH" },
+            { id: "binancecoin", nombre: "Binance Coin (BNB)", symbol: "BNB", chart: "chartBNB" },
+            { id: "solana", nombre: "Solana (SOL)", symbol: "SOL", chart: "chartSOL" },
+            { id: "cardano", nombre: "Cardano (ADA)", symbol: "ADA", chart: "chartADA" },
+        ];
+        const commodities = [
+            { id: "gold", nombre: "Oro (Gold)", symbol: "XAU", chart: "chartGOLD", color: "#FFD700" },
+            { id: "copper", nombre: "Cobre (Copper)", symbol: "XCU", chart: "chartCOPPER", color: "#b87333" },
+        ];
 
-        // Bitcoin
-        new Chart(document.getElementById('chartBTC').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Bitcoin (USD)',
-                    data: [62000, 63000, 61000, 64000, 65000, 64500, 66000],
-                    borderColor: '#007bff',
-                    fill: false,
-                    tension: 0.3
-                }]
+        function formatoUSD(n) {
+            if (n >= 1e12) return "$" + (n/1e12).toFixed(2) + "T";
+            if (n >= 1e9) return "$" + (n/1e9).toFixed(2) + "B";
+            if (n >= 1e6) return "$" + (n/1e6).toFixed(2) + "M";
+            if (n >= 1e3) return "$" + n.toLocaleString("en-US");
+            return "$" + n;
+        }
+        function formatoPorcentaje(n) {
+            return (n > 0 ? "+" : "") + n.toFixed(2) + "%";
+        }
+        function claseCambio(n) {
+            return n >= 0 ? "positive" : "negative";
+        }
+        function getLastNDates(n) {
+            const res = [];
+            const now = new Date();
+            for(let i=n-1; i>=0; i--){
+                const d = new Date(now);
+                d.setDate(now.getDate() - i);
+                res.push(`${d.getDate().toString().padStart(2, '0')}/${(d.getMonth()+1).toString().padStart(2, '0')}`);
             }
-        });
+            return res;
+        }
+        const priceLabels = getLastNDates(7);
 
-        // Ethereum
-        new Chart(document.getElementById('chartETH').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Ethereum (USD)',
-                    data: [3300, 3250, 3200, 3150, 3100, 3175, 3200],
-                    borderColor: '#6610f2',
-                    fill: false,
-                    tension: 0.3
-                }]
-            }
-        });
+        // Extrae un valor diario de la serie CoinGecko (último de cada día)
+        function getDailyPricesFromHourly(prices) {
+            const days = {};
+            prices.forEach(([ts, value]) => {
+                const d = new Date(ts);
+                d.setHours(0,0,0,0); // normaliza a medianoche
+                const key = d.getTime();
+                days[key] = value; // así nos quedamos con el último de cada día
+            });
+            const sorted = Object.keys(days).sort((a,b)=>a-b).map(k=>days[k]);
+            return sorted.slice(-7);
+        }
 
-        // Binance Coin
-        new Chart(document.getElementById('chartBNB').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Binance Coin (USD)',
-                    data: [590, 595, 600, 605, 610, 600, 600],
-                    borderColor: '#ffc107',
-                    fill: false,
-                    tension: 0.3
-                }]
+        // Tabla de precios
+        async function cargarTabla() {
+            const ids = activos.filter(a=>a.chart).map(a => a.id).concat(commodities.map(c => c.id));
+            const apiTabla = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids.join(",")}`;
+            let tabla = "";
+            let huboError = false;
+            try {
+                const res = await fetch(apiTabla);
+                if (!res.ok) throw new Error("CoinGecko no respondió");
+                const datos = await res.json();
+                datos.forEach(act => {
+                    tabla += `<tr>
+                        <td>${act.name} (${act.symbol.toUpperCase()})</td>
+                        <td>${formatoUSD(act.current_price)}</td>
+                        <td class="${claseCambio(act.price_change_percentage_24h)}">${formatoPorcentaje(act.price_change_percentage_24h)}</td>
+                        <td>${formatoUSD(act.market_cap)}</td>
+                    </tr>`;
+                });
+            } catch (e) {
+                tabla += `<tr><td colspan="4">No se pudo obtener datos de CoinGecko.</td></tr>`;
+                huboError = true;
             }
-        });
+            document.getElementById("tabla-precios").innerHTML = tabla || `<tr><td colspan="4">No hay datos.</td></tr>`;
+            document.getElementById("tabla-errores").textContent = huboError ? "Sin conexión a CoinGecko o límite de consultas superado." : "";
+            document.getElementById("tabla-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
+        }
+        cargarTabla();
+        setInterval(cargarTabla, 1000 * 60 * 10);
 
-        // Solana
-        new Chart(document.getElementById('chartSOL').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Solana (USD)',
-                    data: [140, 145, 142, 148, 150, 155, 150],
-                    borderColor: '#20c997',
-                    fill: false,
-                    tension: 0.3
-                }]
+        // Gráficos de tendencias
+        async function cargarGraficoCripto(activo, color="#007bff") {
+            if (!activo.chart) return;
+            const endpoint = `https://api.coingecko.com/api/v3/coins/${activo.id}/market_chart?vs_currency=usd&days=7`;
+            try {
+                const res = await fetch(endpoint);
+                if (!res.ok) throw new Error("Sin respuesta CoinGecko");
+                const datos = await res.json();
+                const precios = getDailyPricesFromHourly(datos.prices || []);
+                if(window[activo.chart+"Obj"]) window[activo.chart+"Obj"].destroy();
+                window[activo.chart+"Obj"] = new Chart(document.getElementById(activo.chart).getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: priceLabels,
+                        datasets: [{
+                            label: activo.nombre,
+                            data: precios.length === 7 ? precios : Array(7).fill(null),
+                            borderColor: color,
+                            fill: false,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Precio USD' } },
+                            x: { title: { display: true, text: 'Fecha' } }
+                        }
+                    }
+                });
+            } catch {
+                if(window[activo.chart+"Obj"]) window[activo.chart+"Obj"].destroy();
+                window[activo.chart+"Obj"] = new Chart(document.getElementById(activo.chart).getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: priceLabels,
+                        datasets: [{
+                            label: activo.nombre,
+                            data: Array(7).fill(null),
+                            borderColor: color,
+                            fill: false,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Precio USD' } },
+                            x: { title: { display: true, text: 'Fecha' } }
+                        }
+                    }
+                });
             }
-        });
-
-        // Cardano
-        new Chart(document.getElementById('chartADA').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Cardano (USD)',
-                    data: [0.50, 0.48, 0.47, 0.46, 0.45, 0.44, 0.45],
-                    borderColor: '#dc3545',
-                    fill: false,
-                    tension: 0.3
-                }]
-            }
-        });
-
-        // Dólar (USD/CLP)
-        new Chart(document.getElementById('chartUSD').getContext('2d'), {
-            ...chartConfig,
-            data: {
-                labels: priceLabels,
-                datasets: [{
-                    label: 'Dólar (CLP)',
-                    data: [920, 925, 918, 930, 935, 928, 940],
-                    borderColor: '#28a745',
-                    fill: false,
-                    tension: 0.3
-                }]
-            }
-        });
+        }
+        async function cargarGraficoCommodity(commodity) {
+            await cargarGraficoCripto(commodity, commodity.color);
+        }
+        async function cargarGraficosTodos() {
+            for(const a of activos.filter(a=>a.chart)) await cargarGraficoCripto(a);
+            for(const c of commodities) await cargarGraficoCommodity(c);
+            document.getElementById("tendencias-data-time").textContent = "Última actualización del cuadro: " + obtenerFechaHoraLocal();
+        }
+        cargarGraficosTodos();
+        setInterval(cargarGraficosTodos, 1000 * 60 * 10);
     </script>
 </body>
 </html>

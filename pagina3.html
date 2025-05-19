@@ -4,72 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indicadores Financieros en Tabla</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
             --accent-color: #e74c3c;
-            --text-color: #333;
-            --bg-color: #f9f9f9;
+            --text-color: #222;
+            --bg-color: #f3f6fa;
             --card-bg: #fff;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow: 0 4px 16px rgba(44, 62, 80, 0.11);
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
-            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
         .card {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 770px;
+            margin: 32px auto 0 auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
+            padding: 36px 28px 22px 28px;
+            border-radius: 18px;
             box-shadow: var(--shadow);
+        }
+        header {
+            margin-bottom: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            background: #e4e8eb;
+            padding: 12px 0;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.08em;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: background 0.18s, color 0.18s;
+        }
+        nav a.active, nav a:hover {
+            background: var(--secondary-color);
+            color: #fff;
         }
         h1 {
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
+            margin-bottom: 16px;
+            margin-top: 0;
+            font-size: 2.1em;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .table-container {
             overflow-x: auto;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            margin-top: 22px;
+        }
+        .data-time-note {
+            font-size: 0.99em;
+            color: #5c6470;
+            margin-top: 10px;
+            margin-bottom: 3px;
+            text-align: right;
+        }
+        .data-excel-note {
+            font-size: 0.98em;
+            color: #888;
+            margin-top: 2px;
+            margin-bottom: 8px;
+            text-align: left;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 2px;
+            background: #fcfdff;
         }
         th, td {
-            padding: 12px;
+            padding: 13px 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #e0e6ed;
+            vertical-align: middle;
         }
         th {
             background-color: var(--secondary-color);
             color: #fff;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.08em;
+            letter-spacing: 0.5px;
+        }
+        td {
+            font-size: 1.04em;
         }
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #f2f6fa;
+        }
+        .error-msg {
+            color: var(--accent-color);
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.08em;
+            margin: 10px 0 2px 0;
         }
         button {
             display: block;
-            margin: 0 auto;
-            padding: 10px 20px;
+            margin: 0 auto 5px auto;
+            padding: 10px 28px;
             background-color: var(--accent-color);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.08em;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(231,76,60,0.07);
+            transition: background 0.19s;
         }
         button:hover {
             background-color: #c0392b;
@@ -81,42 +141,34 @@
         .back-link a {
             color: var(--secondary-color);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
         }
         .back-link a:hover {
-            color: var(--primary-color);
+            text-decoration: underline;
+            color: var(--accent-color);
         }
         /* Responsive para móviles */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-            .card {
-                padding: 15px;
-                max-width: 100%;
-            }
-            h1 {
-                font-size: 1.6em;
-            }
-            .table-container {
-                margin-bottom: 15px;
-            }
-            th, td {
-                padding: 8px;
-                font-size: 0.9em;
-            }
-            button {
-                padding: 8px 16px;
-                font-size: 0.9em;
-            }
-            .back-link {
-                margin-top: 15px;
-            }
+        @media (max-width: 650px) {
+            .card { padding: 10px; max-width: 100%; border-radius: 0; }
+            h1 { font-size: 1.4em; }
+            .table-container { margin-bottom: 10px; margin-top: 14px; }
+            th, td { padding: 8px; font-size: 0.97em; }
+            button { padding: 9px 13px; font-size: 0.98em; }
+            nav { flex-direction: column; gap: 4px; }
+            .data-time-note, .data-excel-note { text-align: left; margin-top: 9px; }
         }
     </style>
 </head>
 <body>
     <div class="card">
+        <header>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="pagina1.html">Indicadores Financieros</a>
+                <a href="pagina2.html">Criptomonedas</a>
+                <a href="pagina3.html" class="active">Indicadores en Tabla</a>
+            </nav>
+        </header>
         <h1>Indicadores Financieros en Tabla</h1>
         <div class="table-container">
             <table id="indicadoresTable">
@@ -124,50 +176,83 @@
                     <tr>
                         <th>Indicador</th>
                         <th>Valor (CLP)</th>
-                        <th>Fecha</th>
+                        <th>Fecha del Indicador</th>
+                        <th>Hora Última Actualización</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
+            <div id="tabla-error" class="error-msg"></div>
+            <p class="data-time-note" id="tabla-data-time"></p>
+            <p class="data-excel-note">
+                <strong>Nota:</strong> La <b>fecha del indicador</b> corresponde al dato oficial publicado. La <b>hora de última actualización</b> indica cuándo se consultaron los datos en este sitio.<br>
+                <b>Esta información es útil al exportar a Excel para trazabilidad y control.</b>
+            </p>
         </div>
-        <button onclick="exportarCSV()">Exportar a Excel (CSV)</button>
+        <button onclick="exportarCSV()">Exportar a CSV</button>
         <div class="back-link">
-            <a href="index.html">Volver al Inicio</a>
+            <a href="index.html">&larr; Volver al Inicio</a>
         </div>
     </div>
-
     <script>
+        function obtenerFechaHoraLocal() {
+            const ahora = new Date();
+            const dia = ahora.getDate().toString().padStart(2, '0');
+            const mes = (ahora.getMonth() + 1).toString().padStart(2, '0');
+            const anio = ahora.getFullYear();
+            const horas = ahora.getHours().toString().padStart(2, '0');
+            const minutos = ahora.getMinutes().toString().padStart(2, '0');
+            const segundos = ahora.getSeconds().toString().padStart(2, '0');
+            return `${anio}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+        }
+
+        let ultimaHoraActualizacion = "";
+
         async function cargarIndicadores() {
+            const errorDiv = document.getElementById("tabla-error");
+            const tbody = document.querySelector('#indicadoresTable tbody');
+            errorDiv.textContent = "";
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Cargando...</td></tr>`;
+            document.getElementById("tabla-data-time").textContent = "";
+
             try {
                 const response = await fetch('https://api.allorigins.win/get?url=https://mindicador.cl/api');
+                if (!response.ok) throw new Error("No se pudo obtener datos de AllOrigins/mindicador.cl");
                 const data = await response.json();
                 const indicadores = JSON.parse(data.contents);
-                
+
                 const indicadoresSeleccionados = [
-                    { nombre: 'Dólar', clave: 'dolar' },
+                    { nombre: 'Dólar Observado', clave: 'dolar' },
                     { nombre: 'Euro', clave: 'euro' },
                     { nombre: 'UF', clave: 'uf' },
                     { nombre: 'UTM', clave: 'utm' },
                     { nombre: 'Bitcoin', clave: 'bitcoin' }
                 ];
 
-                const tbody = document.querySelector('#indicadoresTable tbody');
+                ultimaHoraActualizacion = obtenerFechaHoraLocal();
                 tbody.innerHTML = '';
-
                 indicadoresSeleccionados.forEach(ind => {
                     if (indicadores[ind.clave]) {
+                        // Fecha del indicador (yyyy-mm-dd)
+                        const fechaIndicador = indicadores[ind.clave].fecha.split('T')[0];
+                        // Hora actualización (yyyy-mm-dd HH:MM:SS)
+                        const horaActualizacion = ultimaHoraActualizacion;
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${ind.nombre}</td>
-                            <td>${indicadores[ind.clave].valor.toLocaleString('es-CL')}</td>
-                            <td>${indicadores[ind.clave].fecha.split('T')[0]}</td>
+                            <td>${Number(indicadores[ind.clave].valor).toLocaleString('es-CL')}</td>
+                            <td>${fechaIndicador}</td>
+                            <td>${horaActualizacion}</td>
                         `;
                         tbody.appendChild(row);
                     }
                 });
+                document.getElementById("tabla-data-time").textContent = "Última actualización del cuadro: " + ultimaHoraActualizacion;
             } catch (error) {
-                console.error('Error al cargar indicadores:', error);
-                alert('No se pudieron cargar los indicadores. Intenta de nuevo más tarde.');
+                errorDiv.textContent = "No se pudieron cargar los indicadores. Intenta de nuevo más tarde.";
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Sin datos</td></tr>`;
+                ultimaHoraActualizacion = obtenerFechaHoraLocal();
+                document.getElementById("tabla-data-time").textContent = "Error al actualizar: " + ultimaHoraActualizacion;
             }
         }
 
@@ -175,13 +260,11 @@
             const table = document.getElementById('indicadoresTable');
             let csv = [];
             const rows = table.querySelectorAll('tr');
-
             rows.forEach(row => {
                 const cols = row.querySelectorAll('td, th');
                 const rowData = Array.from(cols).map(col => `"${col.innerText.replace(/"/g, '""')}"`).join(',');
                 csv.push(rowData);
             });
-
             const csvContent = csv.join('\n');
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
